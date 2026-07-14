@@ -1,3 +1,0 @@
-const button = () => {
-  return <div
-}

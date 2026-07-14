@@ -1,14 +1,14 @@
-# builtin.language-features-typescript
+# Markdown Language Features
 
 ## Contributing
 
 ```sh
-git clone git@github.com:lvce-editor/language-features-typescript.git &&
-cd language-features-typescript &&
+git clone git@github.com:lvce-editor/language-features-markdown.git &&
+cd language-features-markdown &&
 npm ci &&
 npm test
 ```
 
 ## Credits
 
-This extension is based on https://github.com/microsoft/vscode/tree/main/extensions/typescript-language-features by Microsoft (License MIT)
+The language server is provided by https://github.com/microsoft/vscode-markdown-languageserver by Microsoft (License MIT).

@@ -1,5 +1,5 @@
 {
-  "name": "@lvce-editor/text-search-worker-server",
+  "name": "@lvce-editor/language-features-markdown-server",
   "version": "0.0.0-dev",
   "main": "index.js",
   "type": "module",
@@ -10,6 +10,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@lvce-editor/server": "^0.64.5"
+    "@lvce-editor/server": "^0.90.1"
   }
 }

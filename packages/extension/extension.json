@@ -1,89 +1,23 @@
 {
-  "id": "builtin.language-features-typescript",
-  "name": "Language Features TypeScript",
-  "description": "TypeScript Language Support",
-  "browser": "dist/languageFeaturesTypeScriptMain.js",
-  "repository": "https://github.com/lvce-editor/language-features-typescript",
+  "id": "builtin.language-features-markdown",
+  "name": "Language Features Markdown",
+  "description": "Markdown language support",
+  "browser": "dist/languageFeaturesMarkdownMain.js",
+  "repository": "https://github.com/lvce-editor/language-features-markdown",
   "icon": "icon.png",
-  "activation": [
-    "onBraceCompletion:javascript",
-    "onBraceCompletion:typescript",
-    "onCompletion:typescript",
-    "onCompletion:javascript",
-    "onDefinition:javascript",
-    "onDefinition:typescript",
-    "onDiagnostic:javascript",
-    "onDiagnostic:typescript",
-    "onLanguage:javascript",
-    "onLanguage:typescript",
-    "onLanguage:typescriptreact",
-    "onLanguage:javascriptreact",
-    "onRename:javascript",
-    "onRename:typescript",
-    "onReferences:javascript",
-    "onReferences:typescript",
-    "onImplementation:javascript",
-    "onImplementation:typescript",
-    "onClosingTag:javascript",
-    "onClosingTag:typescript",
-    "onTypeDefinition:typescript",
-    "onHover:javascript",
-    "onHover:typescript",
-    "onTabCompletion:javascript",
-    "onTabCompletion:typescript"
+  "isolated": true,
+  "workerName": "Markdown Language Features Worker",
+  "activation": ["onCompletion:markdown", "onLanguage:markdown"],
+  "languageServers": [
+    {
+      "id": "vscode-markdown",
+      "languageId": "markdown"
+    }
   ],
   "languages": [
     {
-      "id": "typescript",
-      "extensions": [".ts"]
-    },
-    {
-      "id": "typescriptreact",
-      "extensions": [".tsx"]
-    },
-    {
-      "id": "javascript",
-      "extensions": [".js"]
-    },
-    {
-      "id": "javascriptreact",
-      "extensions": [".jsx"]
-    }
-  ],
-  "codeActions": [
-    {
-      "kind": "source.organizeImports",
-      "name": "Organize Imports",
-      "command": "Editor.organizeImports",
-      "languageId": "typescript"
-    },
-    {
-      "kind": "source.sortImports",
-      "name": "Sort Imports",
-      "command": "Editor.sortImports",
-      "languageId": "typescript"
-    }
-  ],
-  "jsonValidation": [
-    {
-      "fileMatch": "tsconfig.json",
-      "url": "./schemas/tsconfig.schema.json"
-    },
-    {
-      "fileMatch": "tsconfig-*.json",
-      "url": "./schemas/tsconfig.schema.json"
-    },
-    {
-      "fileMatch": "tsconfig.*.json",
-      "url": "./schemas/tsconfig.schema.json"
-    },
-    {
-      "fileMatch": "jsconfig.json",
-      "url": "./schemas/jsconfig.schema.json"
-    },
-    {
-      "fileMatch": "jsconfig.*.json",
-      "url": "./schemas/jsconfig.schema.json"
+      "id": "markdown",
+      "extensions": [".md", ".markdown", ".mdown", ".mkdn", ".mkd", ".mdwn", ".mdtxt", ".mdtext"]
     }
   ]
 }

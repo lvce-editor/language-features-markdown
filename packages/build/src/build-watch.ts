@@ -1,38 +1,34 @@
 import { execa } from 'execa'
-import { root } from './root.ts'
+import { chmod, copyFile, mkdir } from 'node:fs/promises'
 import { join } from 'node:path'
+import { root } from './root.ts'
 
-const main = async (): Promise<void> => {
-  const binaryName: string = 'esbuild'
-  const esbuildPath: string = join(root, 'packages', 'build', 'node_modules', 'esbuild', 'bin', binaryName)
-  execa(
-    esbuildPath,
-    [
-      '--format=esm',
-      '--bundle',
-      '--watch',
-      'packages/extension/src/languageFeaturesTypeScriptMain.ts',
-      '--outfile=packages/extension/dist/languageFeaturesTypeScriptMain.js',
-    ],
-    {
-      cwd: root,
-      stdio: 'inherit',
-    },
-  )
-  execa(
-    esbuildPath,
-    [
-      '--format=esm',
-      '--bundle',
-      '--watch',
-      'packages/typescript-worker/src/typescriptWorkerMain.ts',
-      '--outfile=packages/typescript-worker/dist/typescriptWorkerMain.js',
-    ],
-    {
-      cwd: root,
-      stdio: 'inherit',
-    },
-  )
-}
+const extension = join(root, 'packages', 'extension')
+const languageServerDist = join(extension, 'dist', 'language-server')
 
-main()
+await mkdir(languageServerDist, { recursive: true })
+const languageServerEntry = join(languageServerDist, 'markdown-language-server.js')
+await copyFile(join(extension, 'src', 'markdown-language-server.js'), languageServerEntry)
+await chmod(languageServerEntry, 0o755)
+await copyFile(
+  join(extension, 'node_modules', 'vscode-markdown-languageserver', 'dist', 'node', 'workerMain.js'),
+  join(languageServerDist, 'workerMain.js'),
+)
+
+const esbuildPath = join(root, 'packages', 'build', 'node_modules', 'esbuild', 'bin', 'esbuild')
+execa(
+  esbuildPath,
+  [
+    '--format=esm',
+    '--bundle',
+    '--external:electron',
+    '--external:node:*',
+    '--watch',
+    'packages/extension/src/languageFeaturesMarkdownMain.ts',
+    '--outfile=packages/extension/dist/languageFeaturesMarkdownMain.js',
+  ],
+  {
+    cwd: root,
+    stdio: 'inherit',
+  },
+)

@@ -1,14 +1,14 @@
 {
-  "name": "builtin.language-features-typescript",
+  "name": "builtin.language-features-markdown",
   "version": "0.0.0-dev",
-  "description": "TypeScript language features extension for LVCE Editor",
+  "description": "Markdown language features extension for LVCE Editor",
   "license": "MIT",
   "author": "LVCE Editor",
   "type": "module",
-  "main": "dist/languageFeaturesTypeScriptMain.js",
+  "main": "dist/languageFeaturesMarkdownMain.js",
   "scripts": {
     "build": "tsc",
-    "test": "node --unhandled-rejections=warn --experimental-vm-modules ../../node_modules/jest/bin/jest.js --bail --detectOpenHandles --forceExit",
+    "test": "node --unhandled-rejections=warn --experimental-vm-modules ../../node_modules/jest/bin/jest.js --bail --detectOpenHandles --forceExit --passWithNoTests",
     "test:watch": "node --unhandled-rejections=warn --experimental-vm-modules ../../node_modules/jest/bin/jest.js --bail --detectOpenHandles --watch"
   },
   "jest": {
@@ -28,6 +28,8 @@
     }
   },
   "devDependencies": {
-    "typescript": "^5.9.3"
+    "@lvce-editor/api": "^8.49.0",
+    "typescript": "^5.9.3",
+    "vscode-markdown-languageserver": "^0.5.0"
   }
 }
