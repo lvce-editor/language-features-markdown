@@ -15,22 +15,21 @@ const expectedDiagnostics = [
 
 export const test: Test = async ({ Editor, FileSystem, Main, Settings, Workspace }) => {
   const workspaceUri = await FileSystem.getTmpDir({ scheme: 'file' })
-  const documentUri = `${workspaceUri}/README.md`
-  await FileSystem.writeFile(documentUri, '[missing][reference]\n')
+  await FileSystem.writeFile(`${workspaceUri}/README.md`, '[missing][reference]\n')
   await Workspace.setPath(workspaceUri)
   await Settings.update({ 'editor.diagnostics': true })
 
-  for (let attempt = 0; attempt < 20; attempt++) {
-    await Main.openUri(documentUri)
+  await Main.openUri(`${workspaceUri}/README.md`)
+
+  for (let attempt = 0; attempt < 50; attempt++) {
     try {
       await Editor.shouldHaveDiagnostics(expectedDiagnostics)
       return
     } catch (error) {
-      if (attempt === 19) {
+      if (attempt === 49) {
         throw error
       }
-      await Main.closeActiveEditor()
-      await new Promise((resolve) => setTimeout(resolve, 250))
+      await new Promise((resolve) => setTimeout(resolve, 100))
     }
   }
 }
