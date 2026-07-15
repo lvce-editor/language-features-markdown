@@ -7,7 +7,7 @@
   "icon": "icon.png",
   "isolated": true,
   "workerName": "Markdown Language Features Worker",
-  "activation": ["onCompletion:markdown", "onLanguage:markdown"],
+  "activation": ["onCompletion:markdown", "onDiagnostic:markdown", "onLanguage:markdown"],
   "languageServers": [
     {
       "id": "vscode-markdown",
