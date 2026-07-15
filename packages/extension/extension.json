@@ -1,0 +1,23 @@
+{
+  "id": "builtin.language-features-markdown",
+  "name": "Language Features Markdown",
+  "description": "Markdown language support",
+  "browser": "dist/languageFeaturesMarkdownMain.js",
+  "repository": "https://github.com/lvce-editor/language-features-markdown",
+  "icon": "icon.png",
+  "isolated": true,
+  "workerName": "Markdown Language Features Worker",
+  "activation": ["onCompletion:markdown", "onLanguage:markdown"],
+  "languageServers": [
+    {
+      "id": "vscode-markdown",
+      "languageId": "markdown"
+    }
+  ],
+  "languages": [
+    {
+      "id": "markdown",
+      "extensions": [".md", ".markdown", ".mdown", ".mkdn", ".mkd", ".mdwn", ".mdtxt", ".mdtext"]
+    }
+  ]
+}
