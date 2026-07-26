@@ -11,11 +11,11 @@ const languageServerEntry = join(languageServerDist, 'markdown-language-server.j
 await copyFile(join(extension, 'src', 'markdown-language-server.js'), languageServerEntry)
 await chmod(languageServerEntry, 0o755)
 await copyFile(
-  join(extension, 'node_modules', 'vscode-markdown-languageserver', 'dist', 'node', 'workerMain.js'),
+  join(root, 'node_modules', 'vscode-markdown-languageserver', 'dist', 'node', 'workerMain.js'),
   join(languageServerDist, 'workerMain.js'),
 )
 
-const esbuildPath = join(root, 'packages', 'build', 'node_modules', 'esbuild', 'bin', 'esbuild')
+const esbuildPath = join(root, 'node_modules', 'esbuild', 'bin', 'esbuild')
 execa(
   esbuildPath,
   [
