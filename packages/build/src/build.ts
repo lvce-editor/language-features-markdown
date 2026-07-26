@@ -41,7 +41,7 @@ const builtLanguageServerEntry = join(extensionLanguageServerDist, 'markdown-lan
 await copyFile(languageServerEntry, builtLanguageServerEntry)
 await chmod(builtLanguageServerEntry, 0o755)
 await copyFile(
-  join(extension, 'node_modules', 'vscode-markdown-languageserver', 'dist', 'node', 'workerMain.js'),
+  join(root, 'node_modules', 'vscode-markdown-languageserver', 'dist', 'node', 'workerMain.js'),
   join(extensionLanguageServerDist, 'workerMain.js'),
 )
 await copyFile(builtLanguageServerEntry, join(packagedLanguageServerDist, 'markdown-language-server.js'))
