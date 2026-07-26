@@ -3,6 +3,7 @@
   "name": "Language Features Markdown",
   "description": "Markdown language support",
   "browser": "dist/languageFeaturesMarkdownMain.js",
+  "contentSecurityPolicy": ["default-src 'none'"],
   "repository": "https://github.com/lvce-editor/language-features-markdown",
   "icon": "icon.png",
   "isolated": true,
