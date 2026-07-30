@@ -1,0 +1,25 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "workspaces": {
+    ".": {
+      "entry": ["scripts/*.js"],
+      "project": ["*.js", "scripts/*.js"]
+    },
+    "packages/build": {
+      "project": ["src/**/*.ts"]
+    },
+    "packages/e2e": {
+      "entry": ["src/**/*.ts"],
+      "project": ["src/**/*.ts"]
+    },
+    "packages/extension": {
+      "entry": ["src/languageFeaturesMarkdownMain.ts", "src/markdown-language-server.js"],
+      "project": ["src/**/*.js", "src/**/*.ts"],
+      "ignoreDependencies": ["vscode-markdown-languageserver"],
+      "ignoreUnresolved": ["./workerMain.js"]
+    },
+    "packages/server": {
+      "ignoreDependencies": ["@lvce-editor/server"]
+    }
+  }
+}
