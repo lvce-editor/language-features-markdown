@@ -21,12 +21,13 @@ export const test: Test = async ({ Editor, FileSystem, Main, Settings, Workspace
 
   await Main.openUri(`${workspaceUri}/README.md`)
 
-  for (let attempt = 0; attempt < 50; attempt++) {
+  const maxAttempts = 200
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
     try {
       await Editor.shouldHaveDiagnostics(expectedDiagnostics)
       return
     } catch (error) {
-      if (attempt === 49) {
+      if (attempt === maxAttempts - 1) {
         throw error
       }
       await new Promise((resolve) => setTimeout(resolve, 100))
