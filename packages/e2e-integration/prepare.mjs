@@ -25,5 +25,11 @@ for (const path of config.scripts) {
 }
 // Exercise this repository's build in the pinned application runtime.
 for (const [from, to] of config.artifacts) {
-  await cp(join(owner, from), await realpath(join(application, to)), { recursive: true })
+  const destination = join(application, to)
+  const resolvedDestination = await realpath(destination).catch((error) => {
+    // This integration also supplies artifacts not bundled by the pinned runtime.
+    if (error.code === 'ENOENT') return destination
+    throw error
+  })
+  await cp(join(owner, from), resolvedDestination, { recursive: true })
 }
