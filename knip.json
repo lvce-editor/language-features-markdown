@@ -13,9 +13,13 @@
       "project": ["src/**/*.ts"]
     },
     "packages/extension": {
-      "entry": ["src/languageFeaturesMarkdownMain.ts", "src/markdown-language-server.js"],
-      "project": ["src/**/*.js", "src/**/*.ts"],
-      "ignoreDependencies": ["vscode-markdown-languageserver"],
+      "entry": ["src/languageFeaturesMarkdownMain.ts"],
+      "project": ["src/**/*.js", "src/**/*.ts"]
+    },
+    "packages/node": {
+      "entry": ["src/markdownLanguageServerMain.ts"],
+      "project": ["src/**/*.ts", "test/**/*.ts"],
+      "ignoreDependencies": ["@types/markdown-it", "vscode-markdown-languageserver"],
       "ignoreUnresolved": ["./workerMain.js"]
     },
     "packages/server": {

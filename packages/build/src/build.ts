@@ -5,6 +5,7 @@ import { join } from 'node:path'
 import { root } from './root.ts'
 
 const extension = join(root, 'packages', 'extension')
+const node = join(root, 'packages', 'node')
 const dist = join(root, '.tmp', 'dist')
 const extensionDist = join(extension, 'dist', 'languageFeaturesMarkdownMain.js')
 const extensionLanguageServerDist = join(extension, 'dist', 'language-server')
@@ -36,9 +37,20 @@ await build({
 })
 await copyFile(extensionDist, join(dist, 'dist', 'languageFeaturesMarkdownMain.js'))
 
-const languageServerEntry = join(extension, 'src', 'markdown-language-server.js')
+const languageServerEntry = join(node, 'src', 'markdownLanguageServerMain.ts')
 const builtLanguageServerEntry = join(extensionLanguageServerDist, 'markdown-language-server.js')
-await copyFile(languageServerEntry, builtLanguageServerEntry)
+await build({
+  banner: {
+    js: "#!/usr/bin/env node\nimport { createRequire } from 'node:module'\nconst require = createRequire(import.meta.url)",
+  },
+  bundle: true,
+  entryPoints: [languageServerEntry],
+  external: ['node:*'],
+  format: 'esm',
+  outfile: builtLanguageServerEntry,
+  platform: 'node',
+  target: 'node24',
+})
 await chmod(builtLanguageServerEntry, 0o755)
 await copyFile(
   join(root, 'node_modules', 'vscode-markdown-languageserver', 'dist', 'node', 'workerMain.js'),
